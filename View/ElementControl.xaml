@@ -32,9 +32,9 @@
                     <Setter Property="Effect">
                         <Setter.Value>
                             <DropShadowEffect ShadowDepth="0"
-                          Color="BlueViolet"
+                          Color="Violet"
                           Opacity="1"
-                          BlurRadius="10"/>
+                          BlurRadius="15"/>
                         </Setter.Value>
                     </Setter>
                     <Setter Property="BorderThickness" Value="1"/>                    
@@ -57,7 +57,7 @@
                                 <DropShadowEffect ShadowDepth="0"
                           Color="GreenYellow"
                           Opacity="1"
-                          BlurRadius="10"/>
+                          BlurRadius="15"/>
                             </Setter.Value>
                         </Setter>
                         <Setter Property="BorderThickness" Value="1"/>
@@ -80,7 +80,7 @@
                             <DropShadowEffect ShadowDepth="0"
                           Color="Yellow"
                           Opacity="1"
-                          BlurRadius="10"/>
+                          BlurRadius="15"/>
                         </Setter.Value>
                     </Setter>
                     <Setter Property="BorderThickness" Value="1"/>
@@ -102,7 +102,7 @@
                             <DropShadowEffect ShadowDepth="0"
                           Color="Orange"
                           Opacity="1"
-                          BlurRadius="10"/>
+                          BlurRadius="15"/>
                         </Setter.Value>
                     </Setter>
                     <Setter Property="BorderThickness" Value="1"/>
@@ -124,7 +124,7 @@
                             <DropShadowEffect ShadowDepth="0"
                           Color="Red"
                           Opacity="1"
-                          BlurRadius="10"/>
+                          BlurRadius="15"/>
                         </Setter.Value>
                     </Setter>
                     <Setter Property="BorderThickness" Value="1"/>
@@ -186,8 +186,9 @@
             <DataTemplate>               
                     <Button Command="{Binding DataContext.ClickMiningCommand, ElementName=userControl}" CommandParameter="{Binding Mode=OneWay}">                   
                         <StackPanel Orientation="Vertical">
-                        <Label Content="{Binding Symbol}" HorizontalAlignment="Center"/>
-                        <Label Content="{Binding Name}" HorizontalAlignment="Center"/>                         
+                        <Label Content="{Binding Value}" ContentStringFormat="{}{0:n} aUEC" FontSize="11" HorizontalContentAlignment="Left" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                        <Label Content="{Binding Symbol}" HorizontalContentAlignment="Center" FontSize="15" FontWeight="Heavy"/>
+                        <Label Content="{Binding Name}" HorizontalContentAlignment="Center" FontSize="12" />                         
                         </StackPanel>
                 </Button>   
             </DataTemplate>
