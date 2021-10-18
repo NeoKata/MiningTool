@@ -1,0 +1,13 @@
+﻿<Application x:Class="Mining_Tool_3.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Mining_Tool_3"
+             StartupUri="MainWindow.xaml" Startup="Application_Startup">
+    <Application.Resources>
+        <FontFamily x:Key="comfortaa">pack://application:,,,/Resources/Font/#Comfortaa</FontFamily>
+        <FontFamily x:Key="awesome-solid">pack://application:,,,/Resources/Font/#Font Awesome 5 Free Solid</FontFamily>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="FontFamily" Value="{StaticResource comfortaa}"/>
+        </Style>
+    </Application.Resources>
+</Application>
