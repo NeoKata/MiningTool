@@ -20,7 +20,34 @@ namespace Mining_Tool_3.View
     {
         public CalculatorControl()
         {
-            InitializeComponent();
+            InitializeComponent();          
+        }
+
+        private void SetMiningView(object sender, RoutedEventArgs e)
+        {
+            MiningViewButton.Style = FindResource("SelectedButton") as Style;
+            RefinerieButton.Style = FindResource("DefaultButton") as Style;
+
+            Element.Visibility = Visibility.Visible;
+            ElementTab.Visibility = Visibility.Visible;
+
+            Grid.SetColumn(Cargo, 1);
+            Grid.SetColumnSpan(Cargo, 1);
+
+            Refinerie.Visibility = Visibility.Collapsed;
+        }
+        private void SetRefinerieView(object sender, RoutedEventArgs e)
+        {
+            RefinerieButton.Style = FindResource("SelectedButton") as Style;
+            MiningViewButton.Style = FindResource("DefaultButton") as Style;
+            
+            Element.Visibility = Visibility.Collapsed;
+            ElementTab.Visibility = Visibility.Collapsed;
+            
+            Grid.SetColumn(Cargo, 0);
+            Grid.SetColumnSpan(Cargo, 2);
+
+            Refinerie.Visibility = Visibility.Visible;
         }
     }
 }

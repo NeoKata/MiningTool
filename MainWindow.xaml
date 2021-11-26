@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Mining_Tool_3" xmlns:view="clr-namespace:Mining_Tool_3.View"
         mc:Ignorable="d"
         xml:lang="de-DE"
-        Title="MainWindow" Height="600" Width="850">
+        Title="MainWindow" Height="600" Width="900">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="34" />
     </WindowChrome.WindowChrome>
@@ -227,9 +227,10 @@
             </Grid>
 
             <!--App content-->
-            <Grid Grid.Row="1" x:Name="AppArea">
-                <view:CalculatorControl/>
-            </Grid>
+           
+                <Grid Grid.Row="1" x:Name="AppArea">
+                    <view:CalculatorControl/>
+                </Grid>    
         </Grid>
     </Border>
 </Window>

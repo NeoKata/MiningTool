@@ -71,7 +71,7 @@ namespace Mining_Tool_3.ViewModel
         }
 
         private void Cargo_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
+        {           
             OnPropertyChanged("SumValue");
         }
     }

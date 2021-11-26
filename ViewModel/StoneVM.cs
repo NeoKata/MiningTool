@@ -95,6 +95,7 @@ namespace Mining_Tool_3.ViewModel
             }
             if (foundMineral != null)
             {
+         
                 Minerals.Remove(foundMineral);
                 _stone.Minerals.Remove(foundMineral.Mineral);
             }

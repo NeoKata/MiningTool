@@ -72,6 +72,10 @@ namespace Mining_Tool_3.ViewModel
             _mineral = mineral;
             Messenger.Instance.Register<double>(this, "Stone_Mass", ReceiveMass);
         }
+        ~MineralVM()  
+        {
+            Messenger.Instance.Unregister<double>(this,"Stone_Mass");
+        }
 
         private void ReceiveMass(double mass)
         {
@@ -80,5 +84,6 @@ namespace Mining_Tool_3.ViewModel
             OnPropertyChanged("Cargo");
             OnPropertyChanged("CargoPercent");
         }
+       
     }
 }

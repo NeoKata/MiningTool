@@ -184,11 +184,11 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate>               
-                    <Button Command="{Binding DataContext.ClickMiningCommand, ElementName=userControl}" CommandParameter="{Binding Mode=OneWay}">                   
+                    <Button Command="{Binding DataContext.ClickMiningCommand, ElementName=userControl}" CommandParameter="{Binding Mode=OneWay}" SnapsToDevicePixels="True">                   
                         <StackPanel Orientation="Vertical">
-                        <Label Content="{Binding Value}" ContentStringFormat="{}{0:n} aUEC" FontSize="11" HorizontalContentAlignment="Left" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Button}}"/>
-                        <Label Content="{Binding Symbol}" HorizontalContentAlignment="Center" FontSize="15" FontWeight="Heavy"/>
-                        <Label Content="{Binding Name}" HorizontalContentAlignment="Center" FontSize="12" />                         
+                        <Label SnapsToDevicePixels="True" Content="{Binding Value}" ContentStringFormat="{}{0:n} aUEC" FontSize="11" HorizontalContentAlignment="Left" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Button}}"/>
+                        <Label SnapsToDevicePixels="True" Content="{Binding Symbol}" HorizontalContentAlignment="Center" FontSize="15" FontWeight="Heavy"/>
+                        <Label SnapsToDevicePixels="True" Content="{Binding Name}" HorizontalContentAlignment="Center" FontSize="12" />                         
                         </StackPanel>
                 </Button>   
             </DataTemplate>

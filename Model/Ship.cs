@@ -21,18 +21,6 @@ namespace Mining_Tool_3.Model
         public string Name { get; set; }
         public int CScu { get; set; }
 
-        /*
-        public float CargoValue { get {
-                float sum = 0;
-                foreach (Stone stone in Cargo)
-                {
-                    sum += stone.Value;
-                }
-                return sum;
-            } }
-
-        public IEnumerable<Stone> Cargo { get; set; }
-*/
         public Ship(string name, int cscu) => (Name, CScu) = (name, cscu);
 
     }
