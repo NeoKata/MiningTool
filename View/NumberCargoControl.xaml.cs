@@ -1,4 +1,5 @@
-﻿using Mining_Tool_3.mvvm;
+﻿using Mining_Tool_3.Model;
+using Mining_Tool_3.mvvm;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,11 +23,18 @@ namespace Mining_Tool_3.View
     {
         private double _numberCargoContent = 0;
 
+        private Ship _ship = Ship.PROSPECTOR;
 
         public NumberCargoControl()
         {
             InitializeComponent();
             WriteLablewithLeadingZero();
+            Messenger.Instance.Register<Ship>(this, "ChangeShip", ChangeShip);
+        }
+
+        public void ChangeShip(Ship ship)
+        {
+            _ship = ship;
         }
 
         public static readonly DependencyProperty SetTitelProperty = DependencyProperty.Register(
@@ -73,13 +81,13 @@ namespace Mining_Tool_3.View
 
         private void AddToMass(int number)
         {
-            if (_numberCargoContent >= 32)
+            if (_numberCargoContent >= _ship.Scu)
             {
                 _numberCargoContent = 0;
             }
             _numberCargoContent *= 1000;
             _numberCargoContent += number;
-            _numberCargoContent = Math.Clamp(_numberCargoContent, 0, 3200);
+            _numberCargoContent = Math.Clamp(_numberCargoContent, 0, _ship.CScu);
         }
 
         private void Button_KeyDown(object sender, KeyEventArgs e)

@@ -1,13 +1,7 @@
 ﻿using Mining_Tool_3.Model;
 using Mining_Tool_3.mvvm;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Globalization;
-using System.Text;
-using System.Windows.Data;
-using System.Windows.Input;
 
 namespace Mining_Tool_3.ViewModel
 {
@@ -84,6 +78,11 @@ namespace Mining_Tool_3.ViewModel
 
         public void AddMineral(Element element)
         {
+            AddMineral(element,-1);           
+        }
+
+        public void RemoveMineral(Element element)
+        {            
             MineralVM foundMineral = null;
             foreach (MineralVM mineralVM in Minerals)
             {
@@ -95,13 +94,63 @@ namespace Mining_Tool_3.ViewModel
             }
             if (foundMineral != null)
             {
-         
+                Minerals.Remove(foundMineral);
+                _stone.Minerals.Remove(foundMineral.Mineral);
+            }
+        }
+
+        public void ManageMineral(Element element)
+        {
+            MineralVM foundMineral = null;
+            foreach (MineralVM mineralVM in Minerals)
+            {
+                if (mineralVM.Element == element)
+                {
+                    foundMineral = mineralVM;
+                    break;
+                }
+            }
+            if (foundMineral != null)
+            {         
                 Minerals.Remove(foundMineral);
                 _stone.Minerals.Remove(foundMineral.Mineral);
             }
             else
             {
                 Minerals.Add(new MineralVM(_stone.AddMineral(element)));
+            }
+        }
+
+        public void AddMineral(Element element, double percent)
+        {
+            MineralVM foundMineral = null;
+            foreach (MineralVM mineralVM in Minerals)
+            {
+                if (mineralVM.Element == element)
+                {
+                    foundMineral = mineralVM;
+                    break;
+                }
+            }
+            if (foundMineral == null)
+            {
+                Minerals.Add(new MineralVM(_stone.AddMineral(element)));
+            }
+            else if (percent > -1)
+            {
+                foundMineral.Percentage = percent;
+            }
+        }
+
+        internal void SendToCargo(Element element)
+        {
+            foreach (MineralVM mineralVM in Minerals)
+            {
+                if (mineralVM.Element == element)
+                {
+                    mineralVM.SendToCargo();
+                    break;
+                }
             }
         }
     }

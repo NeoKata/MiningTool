@@ -39,5 +39,18 @@ namespace Mining_Tool_3.View
             RefinerieVM refinerieVM = control.DataContext as RefinerieVM;
             refinerieVM.Cargo = e.NewValue as CargoVM;
         }
+
+        private void DataGrid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            RefinerieVM viewModel = DataContext as RefinerieVM;
+            if (viewModel.RowDetailsVisible == DataGridRowDetailsVisibilityMode.Collapsed)
+            {
+                viewModel.RowDetailsVisible = DataGridRowDetailsVisibilityMode.VisibleWhenSelected;
+            }
+            else
+            {
+                viewModel.RowDetailsVisible = DataGridRowDetailsVisibilityMode.Collapsed;
+            }
+        }
     }
 }

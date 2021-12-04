@@ -13,8 +13,9 @@
         <local:MineralPercentageControl Percentage="{Binding Percentage}" Input="{Binding Input}"/>
             <Label Content="{Binding Value}" ContentStringFormat="{}{0:n} aUEC" Foreground="Aquamarine" HorizontalContentAlignment="Right" Width="100"/>
             <Label Content="{Binding ValueCargo}" ContentStringFormat="{}{0:n} aUEC" Foreground="Aquamarine" HorizontalContentAlignment="Right" Width="100"/>
-            <Label Content="{Binding Cargo}" ContentStringFormat="{}{0:n} / 32.00 SCU" Foreground="Aquamarine" HorizontalContentAlignment="Right" Width="110"/>
-            <Label Content="{Binding CargoPercent}" ContentStringFormat="{}{0:n} %" Foreground="Aquamarine" HorizontalContentAlignment="Right" Width="70"/>
+        <Label Content="{Binding Cargo}" ContentStringFormat="{}{0:00.00} /" Foreground="Aquamarine" HorizontalContentAlignment="Right" Width="61"/>
+        <Label Content="{Binding CargoFormat}" ContentStringFormat="" Foreground="Aquamarine" HorizontalContentAlignment="Left" Margin="-6 0 0 0" Width="68"/>
+        <Label Content="{Binding CargoPercent}" ContentStringFormat="{}{0:n} %" Foreground="Aquamarine" HorizontalContentAlignment="Right" Width="70"/>
         <Button Command="{Binding ToCargoCommand}" Content="&#xF2F5;" FontFamily="{StaticResource awesome-solid}" FontSize="18">
             <Button.Resources>
                 <Style TargetType="{x:Type Button}">

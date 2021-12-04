@@ -26,7 +26,7 @@
     </UserControl.Resources>
     <Border BorderBrush="Aquamarine" BorderThickness="1" SnapsToDevicePixels="True" Margin="0 3 0 0">
         <StackPanel Orientation="Vertical" Background="Transparent">       
-        <Label Foreground="Aquamarine" Margin="0 2 0 26">Cargo</Label>
+        <Label Foreground="Aquamarine" Margin="0 0 0 0">Cargo</Label>
         <ItemsControl ItemsSource="{Binding CargoItems}" ItemTemplate="{DynamicResource itemViewCargo}"/>
         <Label Content="{Binding SumValue}" ContentStringFormat="Summe: {0:n} aUEC" Foreground="Aquamarine"/>
         </StackPanel>

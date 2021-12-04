@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mining_Tool_3.mvvm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -25,6 +26,60 @@ namespace Mining_Tool_3.View
         {
             InitializeComponent();
             WriteLablewithLeadingZero();
+            Messenger.Instance.Register<String>(this, "SpeechRecognition", NotifySpeech);
+        }
+
+        ~NumberControl()
+        {
+            Messenger.Instance.Unregister<String>(this, "SpeechRecognition");
+        }
+
+        private void NotifySpeech(string name)
+        {
+
+            if (name.Contains("Masse") && name.Contains("Löschen"))
+            {
+                NumberContent = 0;
+                WriteLablewithLeadingZero();
+                return;
+            }
+
+            if (name.Contains("Masse"))
+            {   
+                var names = name.Split(" ");
+                if(names.Length > 1)
+                {
+                    var number = new int[names.Length];
+                    for (int i = 1;i<names.Length;i++)
+                    {
+                        if(names[i] == "Tausend")
+                        {
+                            names[i] = "1000";
+                            number[i] = i - 1 > 0 ?  int.Parse(names[i - 1]) * 999 : 1000;
+                            continue;
+                        }
+                        if(names[i] == "Hundert")
+                        {
+                            names[i] = "100";
+                            number[i] = i - 1 > 1 ? int.Parse(names[i - 1]) * 99 : 100;
+                            continue;
+                        }
+                        if (int.Parse(names[i]) > 10 && i == 1 && names.Length > 2)
+                        {
+                            number[i] = int.Parse(names[i]) * 100;
+                            continue;
+                        }
+                        number[i] = int.Parse(names[i]);
+                    }
+                    _numberContent = 0;
+                    for (int i = 0;i<number.Length;i++)
+                    {
+                        _numberContent += number[i];
+                    }
+                    NumberContent = _numberContent;
+                    WriteLablewithLeadingZero();
+                }
+            }
         }
 
         public static readonly DependencyProperty SetTitelProperty = DependencyProperty.Register(

@@ -1,4 +1,5 @@
-﻿using Mining_Tool_3.ViewModel;
+﻿using Mining_Tool_3.mvvm;
+using Mining_Tool_3.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +29,7 @@ namespace Mining_Tool_3.View
             InitializeComponent();
             writeLablewithLeadingZero();
         }
-        
+
         public static readonly DependencyProperty SetInputProperty = DependencyProperty.Register(
           "Input", typeof(bool), typeof(MineralPercentageControl),
           new FrameworkPropertyMetadata(true, new PropertyChangedCallback(ChangeInput)));

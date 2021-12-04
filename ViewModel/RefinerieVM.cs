@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Windows.Controls;
 
 namespace Mining_Tool_3.ViewModel
 {
@@ -27,6 +28,18 @@ namespace Mining_Tool_3.ViewModel
                 return RefinementMethode.RefinementMethodes;
             }
         }
+
+        private DataGridRowDetailsVisibilityMode _rowDetailsVisible;
+        public DataGridRowDetailsVisibilityMode RowDetailsVisible
+        {
+            get { return _rowDetailsVisible; }
+            set
+            {
+                _rowDetailsVisible = value;
+                OnPropertyChanged("RowDetailsVisible");
+            }
+        }
+
 
         private CargoVM _cargo;
         public CargoVM Cargo

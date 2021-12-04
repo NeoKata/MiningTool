@@ -27,8 +27,12 @@
     <Border BorderBrush="Aquamarine" BorderThickness="0" Margin="0 2 0 0" >
         <DataGrid Grid.Row="1" Grid.Column="1" ItemsSource="{Binding RefinementMethodes}" AutoGenerateColumns="False" IsReadOnly="True" 
           HorizontalGridLinesBrush="Aquamarine"
-          VerticalGridLinesBrush="Aquamarine">
-            <DataGrid.Resources>               
+          VerticalGridLinesBrush="Aquamarine"
+          RowDetailsVisibilityMode="{Binding RowDetailsVisible}"
+          MouseDown="DataGrid_MouseDown">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#7F08DABE"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#0008DABE"/>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                 <Setter Property="VerticalContentAlignment" Value="Center" />
                     <Setter Property="Foreground" Value="Aquamarine"/>
@@ -57,8 +61,7 @@
                 </Style>    
                     <DataTemplate x:Key="itemViewDetails">
                         <StackPanel Orientation="Horizontal">
-                        <WrapPanel Width="130">
-                        <Label  Content="{Binding Key.Name}" Foreground="Aquamarine" />
+                        <WrapPanel Width="130">                     
                         <Border CornerRadius="12" Width="30" Height="25" Margin="0 0 0 5">
                                 <Border.Style>
                                     <Style TargetType="{x:Type Border}">
@@ -75,6 +78,7 @@
                                 </Border.Style>
                            <Label FontSize="10" Content="{Binding Value.Yield}" ContentStringFormat="{}{0:P0}" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />                                
                         </Border>
+                        <Label  Content="{Binding Key.Name}" Foreground="Aquamarine" />
                         </WrapPanel>
                         <Label Content="{Binding Value.Value}" ContentStringFormat="{}{0:n} aUEC" Foreground="Aquamarine" HorizontalContentAlignment="Right"/>
                     </StackPanel>

@@ -20,7 +20,6 @@ namespace Mining_Tool_3
             EventManager.RegisterClassHandler(typeof(Button), Button.KeyDownEvent, new KeyEventHandler(TextBox_KeyDown));
         }
 
-
         void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
 
@@ -51,7 +50,10 @@ namespace Mining_Tool_3
 
             if (nextButton.Focus())
             {
-                e.Handled = true;
+                if (e != null)
+                {
+                    e.Handled = true;
+                }
             }
         }
     }

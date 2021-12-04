@@ -33,10 +33,10 @@ namespace Mining_Tool_3.Model
         public double Value { get { return (Math.Truncate(Mass) * Element.Value); } }
         public double CargoValue { get { return Cargo * 100.0 * Element.Value; } }
         public double Cargo
-        {            
-            get { return Math.Truncate(((Stone.Ship.CScu / 100.0) * CargoPercent) * 100.0) / 100.0; }
+        {
+            get { return Math.Round((Stone.Ship.CScu <= Mass ? Stone.Ship.CScu : Mass) / 100, 4); }
         }
-        public double CargoPercent { get { return Math.Round((Stone.Ship.CScu <= Mass ? Stone.Ship.CScu : Mass) / Stone.Ship.CScu,4) ; } }
+        public double CargoPercent { get { return Math.Round((Cargo / Stone.Ship.CScu)*100,4) ; } }
 
         public Mineral(Element element, Stone stone) => (Element, Stone, Percentage) = (element, stone, 0);
 

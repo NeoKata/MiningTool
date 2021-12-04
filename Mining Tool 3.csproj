@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Speech" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\Font\Comfortaa-Medium.ttf" />
     <Resource Include="Resources\Font\Font Awesome 5 Free-Solid-900.otf" />
   </ItemGroup>

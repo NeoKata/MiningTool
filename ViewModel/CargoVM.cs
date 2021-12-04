@@ -37,6 +37,11 @@ namespace Mining_Tool_3.ViewModel
             Messenger.Instance.Register<Mineral>(this, "MineralVM_Mineral_To_Cargo", ReceiveMineral);
         }
 
+        ~CargoVM()
+        {
+            Messenger.Instance.Unregister<Mineral>(this, "MineralVM_Mineral_To_Cargo");
+        }
+
         private ICommand _deleteCargoCommand;
 
         public ICommand DeleteCargoCommand
@@ -59,7 +64,10 @@ namespace Mining_Tool_3.ViewModel
             {
                 if (cargoModel.Element == mineral.Element)
                 {
-                    cargoModel.SCU += mineral.Cargo;
+                    if(mineral.Stone.Ship.Scu >= (cargoModel.SCU + mineral.Cargo))
+                    {
+                        cargoModel.SCU += mineral.Cargo;
+                    }                 
                     return;
                 }
             }
