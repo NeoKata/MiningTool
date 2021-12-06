@@ -19,6 +19,7 @@ namespace Mining_Tool_3.mvvm
             recognitionEngine.SetInputToDefaultAudioDevice();
             recognitionEngine.LoadGrammar(DefaultGrammar());
             recognitionEngine.SpeechRecognized += RecognitionEngine_SpeechRecognized;
+            _completed = new ManualResetEvent(false);
             _worker.DoWork += _worker_DoWork;
         }
 
@@ -26,18 +27,32 @@ namespace Mining_Tool_3.mvvm
         {
             recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
             _completed.WaitOne();
+            recognitionEngine.RecognizeAsyncStop();
         }
 
         public void start()
         {
-            _completed = new ManualResetEvent(false);
+            _completed.Reset();
             _worker.RunWorkerAsync();
         }
 
         private void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            Debug.WriteLine(e.Result.Text);
-            Messenger.Instance.Send(e.Result.Text, "SpeechRecognition");
+            var text = ReplacementText(e.Result.Text);
+
+            Messenger.Instance.Send(text, "SpeechRecognition");
+        }
+
+        private string ReplacementText(string text)
+        {         
+            foreach (Element element in Element.ByValues)
+            {
+                if (text.Contains(element.GermanSpeech))
+                {
+                    return text.Replace(element.GermanSpeech, element.Name);
+                }               
+            }           
+            return text;
         }
 
         private Grammar DefaultGrammar()
@@ -74,7 +89,7 @@ namespace Mining_Tool_3.mvvm
 
             foreach (Element element in Element.ByValues)
             {
-                GrammarBuilder elementPhrase = new GrammarBuilder(element.Name);
+                GrammarBuilder elementPhrase = new GrammarBuilder(element.GermanSpeech);
                 elementPhrase.Append(numbers, 0, 1);
                 elementPhrase.Append(komma, 0, 1);
                 elementPhrase.Append(numbers, 0, 2);
@@ -84,6 +99,11 @@ namespace Mining_Tool_3.mvvm
 
             return new Grammar(new GrammarBuilder(choices))
             { Name = "StoneGrammar" };
+        }
+
+        internal void stop()
+        {
+            _completed.Set();
         }
     }
 }

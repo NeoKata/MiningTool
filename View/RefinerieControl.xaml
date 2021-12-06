@@ -7,6 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+
+        <Style x:Key="defaultButton" TargetType="{x:Type Button}">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="RoyalBlue"/>
+        </Style>
+        
         <local:PercentValueConverter x:Key="percentValueConverter"/>
         <DataTemplate x:Key="itemViewRefieneries">
             <Label Content="{Binding Symbol}" Foreground="Aquamarine"/>
@@ -24,138 +31,161 @@
             </Border>
         </DataTemplate>
     </UserControl.Resources>
-    <Border BorderBrush="Aquamarine" BorderThickness="0" Margin="0 2 0 0" >
-        <DataGrid Grid.Row="1" Grid.Column="1" ItemsSource="{Binding RefinementMethodes}" AutoGenerateColumns="False" IsReadOnly="True" 
+    <StackPanel>
+        <Border BorderBrush="Aquamarine" BorderThickness="0" Margin="0 2 0 0" >
+            <DataGrid Grid.Row="1" Grid.Column="1" ItemsSource="{Binding RefinementMethodes}" AutoGenerateColumns="False" IsReadOnly="True" 
           HorizontalGridLinesBrush="Aquamarine"
           VerticalGridLinesBrush="Aquamarine"
           RowDetailsVisibilityMode="{Binding RowDetailsVisible}"
           MouseDown="DataGrid_MouseDown">
-            <DataGrid.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#7F08DABE"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#0008DABE"/>
-                <Style TargetType="{x:Type DataGridColumnHeader}">
-                <Setter Property="VerticalContentAlignment" Value="Center" />
-                    <Setter Property="Foreground" Value="Aquamarine"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                                <Grid>
-                                    <Border x:Name="columnHeaderBorder"
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#7F08DABE"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#0008DABE"/>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                        <Setter Property="Foreground" Value="Aquamarine"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                                    <Grid>
+                                        <Border x:Name="columnHeaderBorder"
 		                                            BorderThickness="1"
 		                                            Padding="3,0,3,0">
-                                        <Border.BorderBrush>
-                                            <SolidColorBrush Color="Aquamarine"/>
-                                        </Border.BorderBrush>
-                                        <Border.Background>
-                                            <SolidColorBrush Color="#FF242425"/>
-                                        </Border.Background>
-                                        <ContentPresenter 
+                                            <Border.BorderBrush>
+                                                <SolidColorBrush Color="Aquamarine"/>
+                                            </Border.BorderBrush>
+                                            <Border.Background>
+                                                <SolidColorBrush Color="#FF242425"/>
+                                            </Border.Background>
+                                            <ContentPresenter 
                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 			                            	SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                    </Border>
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>    
+                                        </Border>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
                     <DataTemplate x:Key="itemViewDetails">
                         <StackPanel Orientation="Horizontal">
-                        <WrapPanel Width="130">                     
-                        <Border CornerRadius="12" Width="30" Height="25" Margin="0 0 0 5">
-                                <Border.Style>
-                                    <Style TargetType="{x:Type Border}">
-                                        <Setter Property="Background" Value="YellowGreen"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Value.Yield,Converter={StaticResource percentValueConverter}}" Value="0">
-                                                <Setter Property="Visibility" Value="Hidden"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Value.Yield,Converter={StaticResource percentValueConverter}}" Value="-1">
-                                                <Setter Property="Background" Value="OrangeRed"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>                                 
-                                </Border.Style>
-                           <Label FontSize="10" Content="{Binding Value.Yield}" ContentStringFormat="{}{0:P0}" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />                                
-                        </Border>
-                        <Label  Content="{Binding Key.Name}" Foreground="Aquamarine" />
-                        </WrapPanel>
-                        <Label Content="{Binding Value.Value}" ContentStringFormat="{}{0:n} aUEC" Foreground="Aquamarine" HorizontalContentAlignment="Right"/>
-                    </StackPanel>
+                            <WrapPanel Width="130">
+                                <Border CornerRadius="12" Width="30" Height="25" Margin="0 0 0 5">
+                                    <Border.Style>
+                                        <Style TargetType="{x:Type Border}">
+                                            <Setter Property="Background" Value="YellowGreen"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Value.Yield,Converter={StaticResource percentValueConverter}}" Value="0">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Value.Yield,Converter={StaticResource percentValueConverter}}" Value="-1">
+                                                    <Setter Property="Background" Value="OrangeRed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <Label FontSize="10" Content="{Binding Value.Yield}" ContentStringFormat="{}{0:P0}" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                                </Border>
+                                <Label  Content="{Binding Key.Name}" Foreground="Aquamarine" />
+                            </WrapPanel>
+                            <Label Content="{Binding Value.Value}" ContentStringFormat="{}{0:n} aUEC" Foreground="Aquamarine" HorizontalContentAlignment="Right"/>
+                        </StackPanel>
                     </DataTemplate>
-            </DataGrid.Resources>
-            <DataGrid.RowStyle>                
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="#FF242425"/>
-                </Style>
-            </DataGrid.RowStyle>
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell" >
-                    <Setter Property="Foreground" Value="{Binding Color}"/>
-                </Style>
-            </DataGrid.CellStyle>
-            <DataGrid.RowDetailsTemplate>                
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <WrapPanel>
-                            <TextBlock Text="Cost: " Foreground="Aquamarine" />
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding MethodCost}" Foreground="Aquamarine" TextWrapping="WrapWithOverflow" />
-                        </WrapPanel>
-                        <WrapPanel>
-                            <TextBlock Text="Speed: " Foreground="Aquamarine" />
-                            <TextBlock HorizontalAlignment="Left" Text="{Binding MethodSpeed}" Foreground="Aquamarine" TextWrapping="WrapWithOverflow" />
-                        </WrapPanel>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="0" Grid.Row="0" Content="{Binding ARC_L1.Symbol}" Foreground="Aquamarine"/>
-                            <Label Grid.Column="1" Grid.Row="0" Content="{Binding ARC_L1.Name}" Foreground="Aquamarine"/>
-                            <ItemsControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding ARC_L1.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
-                            <Label Grid.Column="2" Grid.Row="0" Content="{Binding CRU_L1.Symbol}" Foreground="Aquamarine"/>
-                            <Label Grid.Column="3" Grid.Row="0" Content="{Binding CRU_L1.Name}" Foreground="Aquamarine"/>
-                            <ItemsControl Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding CRU_L1.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
-                            <Label Grid.Column="4" Grid.Row="0" Content="{Binding HUR_L1.Symbol}" Foreground="Aquamarine"/>
-                            <Label Grid.Column="5" Grid.Row="0" Content="{Binding HUR_L1.Name}" Foreground="Aquamarine"/>
-                            <ItemsControl Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding HUR_L1.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
-                            <Label Grid.Column="6" Grid.Row="0" Content="{Binding HUR_L2.Symbol}" Foreground="Aquamarine"/>
-                            <Label Grid.Column="7" Grid.Row="0" Content="{Binding HUR_L2.Name}" Foreground="Aquamarine"/>
-                            <ItemsControl Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding HUR_L2.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
-                            <Label Grid.Column="8" Grid.Row="0" Content="{Binding MIC_L1.Symbol}" Foreground="Aquamarine"/>
-                            <Label Grid.Column="9" Grid.Row="0" Content="{Binding MIC_L1.Name}" Foreground="Aquamarine"/>
-                            <ItemsControl Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding MIC_L1.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
-                        </Grid>
-                    </StackPanel>                        
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
-            <DataGrid.RowHeaderStyle>
-                <Style>
-                    <Setter Property="Control.Background" Value="Transparent"/>
-                </Style>
-            </DataGrid.RowHeaderStyle>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Methode" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="ARC-L1" Binding="{Binding Path=ARC_L1.Value, StringFormat={}{0:n} aUEC}"/>
-                <DataGridTextColumn Header="CRU-L1" Binding="{Binding Path=CRU_L1.Value, StringFormat={}{0:n} aUEC}"/>
-                <DataGridTextColumn Header="HUR-L1" Binding="{Binding Path=HUR_L1.Value, StringFormat={}{0:n} aUEC}"/>
-                <DataGridTextColumn Header="HUR-L2" Binding="{Binding Path=HUR_L2.Value, StringFormat={}{0:n} aUEC}"/>
-                <DataGridTextColumn Header="MIC-L1" Binding="{Binding Path=MIC_L1.Value, StringFormat={}{0:n} aUEC}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <!--DataGrid Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Items}" AlternatingRowBackground="LightBlue" AlternationCount="2" /-->
-        <!--ItemsControl Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Items}" ItemTemplate="{DynamicResource itemViewMaterial}"/-->
-    </Border>
+                </DataGrid.Resources>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="#FF242425"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell" >
+                        <Setter Property="Foreground" Value="{Binding Color}"/>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <WrapPanel>
+                                <TextBlock Text="Cost: " Foreground="Aquamarine" />
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding MethodCost}" Foreground="Aquamarine" TextWrapping="WrapWithOverflow" />
+                                <TextBlock Text="  " Foreground="Aquamarine" />
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding SumCost, StringFormat={}{0:n} aUEC}" Foreground="Aquamarine" TextWrapping="WrapWithOverflow" />
+                            </WrapPanel>
+                            <WrapPanel>
+                                <TextBlock Text="Speed: " Foreground="Aquamarine" />
+                                <TextBlock HorizontalAlignment="Left" Text="{Binding MethodSpeed}" Foreground="Aquamarine" TextWrapping="WrapWithOverflow" />
+                            </WrapPanel>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" Content="{Binding ARC_L1.Symbol}" Foreground="Aquamarine"/>
+                                <WrapPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left">
+                                    <Label Content="{Binding ARC_L1.Name}" Foreground="Aquamarine"/>
+                                    <Button Margin="0 0 6 0" Content="&#xF328;" FontFamily="{StaticResource awesome-solid}" FontSize="15" Style="{DynamicResource defaultButton}"
+                                        Command="{Binding Path=ARC_L1ToReminderCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                </WrapPanel>
+                                <ItemsControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" ItemsSource="{Binding ARC_L1.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
+                                <Label Grid.Column="2" Grid.Row="0" Content="{Binding CRU_L1.Symbol}" Foreground="Aquamarine"/>
+                                <WrapPanel Grid.Column="2" Grid.Row="1">
+                                    <Label Content="{Binding CRU_L1.Name}" Foreground="Aquamarine"/>
+                                    <Button Margin="0 0 6 0" Content="&#xF328;" FontFamily="{StaticResource awesome-solid}" FontSize="15" Style="{DynamicResource defaultButton}"
+                                        Command="{Binding Path=CRU_L1ToReminderCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                </WrapPanel>
+                                <ItemsControl Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" ItemsSource="{Binding CRU_L1.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
+                                <Label Grid.Column="4" Grid.Row="0" Content="{Binding HUR_L1.Symbol}" Foreground="Aquamarine"/>
+                                <WrapPanel Grid.Column="4" Grid.Row="1">
+                                    <Label Content="{Binding HUR_L1.Name}" Foreground="Aquamarine"/>
+                                    <Button Margin="0 0 6 0" Content="&#xF328;" FontFamily="{StaticResource awesome-solid}" FontSize="15" Style="{DynamicResource defaultButton}"
+                                        Command="{Binding Path=HUR_L1ToReminderCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                </WrapPanel>
+                                <ItemsControl Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="2" ItemsSource="{Binding HUR_L1.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
+                                <Label Grid.Column="6" Grid.Row="0" Content="{Binding HUR_L2.Symbol}" Foreground="Aquamarine"/>
+                                <WrapPanel Grid.Column="6" Grid.Row="1">
+                                    <Label Content="{Binding HUR_L2.Name}" Foreground="Aquamarine"/>
+                                    <Button Margin="0 0 6 0" Content="&#xF328;" FontFamily="{StaticResource awesome-solid}" FontSize="15" Style="{DynamicResource defaultButton}"
+                                        Command="{Binding Path=HUR_L2ToReminderCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                </WrapPanel>
+                                <ItemsControl Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="2" ItemsSource="{Binding HUR_L2.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
+                                <Label Grid.Column="8" Grid.Row="0" Content="{Binding MIC_L1.Symbol}" Foreground="Aquamarine"/>
+                                <WrapPanel Grid.Column="8" Grid.Row="1">
+                                    <Label Content="{Binding MIC_L1.Name}" Foreground="Aquamarine"/>
+                                    <Button Margin="0 0 6 0" Content="&#xF328;" FontFamily="{StaticResource awesome-solid}" FontSize="15" Style="{DynamicResource defaultButton}"
+                                        Command="{Binding Path=MIC_L1ToReminderCommand}" CommandParameter="{Binding Mode=OneWay}"/>
+                                </WrapPanel>
+                                <ItemsControl Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="2" ItemsSource="{Binding MIC_L1.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
+                            </Grid>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+                <DataGrid.RowHeaderStyle>
+                    <Style>
+                        <Setter Property="Control.Background" Value="Transparent"/>
+                    </Style>
+                </DataGrid.RowHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Methode" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="ARC-L1" Binding="{Binding Path=ARC_L1.Value, StringFormat={}{0:n} aUEC}" FontSize="15"/>
+                    <DataGridTextColumn Header="CRU-L1" Binding="{Binding Path=CRU_L1.Value, StringFormat={}{0:n} aUEC}" FontSize="15"/>
+                    <DataGridTextColumn Header="HUR-L1" Binding="{Binding Path=HUR_L1.Value, StringFormat={}{0:n} aUEC}" FontSize="15"/>
+                    <DataGridTextColumn Header="HUR-L2" Binding="{Binding Path=HUR_L2.Value, StringFormat={}{0:n} aUEC}" FontSize="15"/>
+                    <DataGridTextColumn Header="MIC-L1" Binding="{Binding Path=MIC_L1.Value, StringFormat={}{0:n} aUEC}" FontSize="15"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>       
+    </StackPanel>
 </UserControl>

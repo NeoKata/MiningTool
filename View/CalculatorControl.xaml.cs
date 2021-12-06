@@ -1,5 +1,6 @@
 ﻿using Mining_Tool_3.Model;
 using Mining_Tool_3.mvvm;
+using Mining_Tool_3.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,18 +21,19 @@ namespace Mining_Tool_3.View
     /// </summary>
     public partial class CalculatorControl : UserControl
     {
+        SpeechRecognition speechRecognition = new SpeechRecognition();
         public CalculatorControl()
         {
             InitializeComponent();
-            Messenger.Instance.Register<String>(this, "SpeechRecognition", NotifySpeech);
-            SpeechRecognition speechRecognition = new SpeechRecognition();
+            DataContext = new MainVM();
+            Messenger.Instance.Register<String>(this, "SpeechRecognition", NotifySpeech);           
             speechRecognition.start();
-
-           
         }
 
         private void NotifySpeech(string name)
         {
+
+
             if (name == "Meining")
             {
                 ActivateMiningView();
@@ -62,6 +64,7 @@ namespace Mining_Tool_3.View
             Grid.SetColumnSpan(Cargo, 1);
 
             Refinerie.Visibility = Visibility.Collapsed;
+            MyReminderControl.Visibility = Visibility.Collapsed;
         }
 
         private void SetRefinerieView(object sender, RoutedEventArgs e)
@@ -82,6 +85,7 @@ namespace Mining_Tool_3.View
             Grid.SetColumnSpan(Cargo, 2);
 
             Refinerie.Visibility = Visibility.Visible;
+            MyReminderControl.Visibility = Visibility.Visible;
         }
 
         private void ShipSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -93,6 +97,20 @@ namespace Mining_Tool_3.View
             if (ShipSelect.SelectedIndex == 1)
             {
                 Messenger.Instance.Send(Ship.MOLE, "ChangeShip");
+            }
+        }
+
+        private void Mic_Click(object sender, RoutedEventArgs e)
+        {
+            if (mic_button.Content.Equals("\uF130"))
+            {
+                mic_button.Content = "\uF131";
+                speechRecognition.stop();
+            }
+            else
+            {
+                mic_button.Content = "\uF130";
+                speechRecognition.start();
             }
         }
     }

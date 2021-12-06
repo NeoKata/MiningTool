@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Mining_Tool_3.mvvm;
+using Mining_Tool_3.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Mining_Tool_3.Model
 {
     public class RefinementMethode
-    {   
+    {
         public enum Speed
         {
             XtraFast,
@@ -28,10 +31,10 @@ namespace Mining_Tool_3.Model
         public static readonly RefinementMethode DINYX = new RefinementMethode("Dinyx Solvenation", 0.05, Speed.XtraSlow, Cost.Low);
         public static readonly RefinementMethode FERRON = new RefinementMethode("Ferron Exchange", 0.05, Speed.VerySlow, Cost.Mid);
         public static readonly RefinementMethode PYROMETRIC = new RefinementMethode("Pyrometric Chromalysis", 0.05, Speed.Slow, Cost.High);
-        public static readonly RefinementMethode THERMONATIC = new RefinementMethode("Thermonatic Deposition", 0.1925, Speed.Slow, Cost.XtraLow);
+        public static readonly RefinementMethode THERMONATIC = new RefinementMethode("Thermonatic Deposition", 0.1925, Speed.Slow, Cost.Low);
         public static readonly RefinementMethode ELECTROSTAROLYSIS = new RefinementMethode("Electrostarolysis", 0.1925, Speed.Mid, Cost.Mid);
         public static readonly RefinementMethode GASKIN = new RefinementMethode("Gaskin Process", 0.1925, Speed.Mid, Cost.High);
-        public static readonly RefinementMethode KAZEN = new RefinementMethode("Kazen Winnowing", 0.335, Speed.Mid, Cost.XtraLow);
+        public static readonly RefinementMethode KAZEN = new RefinementMethode("Kazen Winnowing", 0.335, Speed.Mid, Cost.Low);
         public static readonly RefinementMethode CORMACK = new RefinementMethode("Cormack Method", 0.335, Speed.VeryFast, Cost.Mid);
         public static readonly RefinementMethode XCR = new RefinementMethode("XCR Reaction", 0.335, Speed.XtraFast, Cost.High);
 
@@ -59,13 +62,14 @@ namespace Mining_Tool_3.Model
         public string Name { get; private set; }
         public double Loss { get; private set; }
         public Speed MethodSpeed { get; private set; }
-        public Cost MethodCost { get; private set; }  
+        public Cost MethodCost { get; private set; }
+        public double SumCost { get; set; }
         public Refinery ARC_L1 { get; private set; }
         public Refinery CRU_L1 { get; private set; }
         public Refinery HUR_L1 { get; private set; }
         public Refinery HUR_L2 { get; private set; }
         public Refinery MIC_L1 { get; private set; }
-        
+
         private byte[] Range(double value)
         {
             byte[] bytes = new byte[2];
@@ -78,7 +82,7 @@ namespace Mining_Tool_3.Model
             }
             double green = colorValue / 255;
             double red = 2.0 - green;
-            if(green > 1)
+            if (green > 1)
             {
                 green = 1;
             }
@@ -92,24 +96,25 @@ namespace Mining_Tool_3.Model
             bytes[1] = Convert.ToByte(red);
             return bytes;
         }
-        
-        public Brush Color {
+
+        public Brush Color
+        {
             get
             {
-                if(_lastId != ID)
+                if (_lastId != ID)
                 {
                     _lastId = ID;
                     _elementCount = 1;
                 }
-                else 
+                else
                 {
-                   _elementCount++;
+                    _elementCount++;
                 }
 
                 switch (_elementCount)
                 {
                     case 4:
-                        return new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, Range(ARC_L1.Value)[1], Range(ARC_L1.Value)[0], 0));                      
+                        return new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, Range(ARC_L1.Value)[1], Range(ARC_L1.Value)[0], 0));
                     case 6:
                         return new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, Range(CRU_L1.Value)[1], Range(CRU_L1.Value)[0], 0));
                     case 8:
@@ -120,13 +125,74 @@ namespace Mining_Tool_3.Model
                         return new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, Range(MIC_L1.Value)[1], Range(MIC_L1.Value)[0], 0));
                     default:
                         return Brushes.Aquamarine;
-                }              
+                }
             }
         }
 
+        private ICommand _arctoReminderCommand;
+        public ICommand ARC_L1ToReminderCommand
+        {
+            get
+            {
+                return _arctoReminderCommand ?? (_arctoReminderCommand = new CommandHandler((sender) =>
+                {
+                    Messenger.Instance.Send(sender as RefinementMethode, "Reminder_ARC1");
+                }, () => true));
+            }
+        }
+
+        private ICommand _crutoReminderCommand;
+        public ICommand CRU_L1ToReminderCommand
+        {
+            get
+            {
+                return _crutoReminderCommand ?? (_crutoReminderCommand = new CommandHandler((sender) =>
+                {
+                    Messenger.Instance.Send(sender as RefinementMethode, "Reminder_CRU1");
+                }, () => true));
+            }
+        }
+
+        private ICommand _hur1toReminderCommand;
+        public ICommand HUR_L1ToReminderCommand
+        {
+            get
+            {
+                return _hur1toReminderCommand ?? (_hur1toReminderCommand = new CommandHandler((sender) =>
+                {
+                    Messenger.Instance.Send(sender as RefinementMethode, "Reminder_HUR1");
+                }, () => true));
+            }
+        }
+
+        private ICommand _hur2toReminderCommand;
+        public ICommand HUR_L2ToReminderCommand
+        {
+            get
+            {
+                return _hur2toReminderCommand ?? (_hur2toReminderCommand = new CommandHandler((sender) =>
+                {
+                    Messenger.Instance.Send(sender as RefinementMethode, "Reminder_HUR2");
+                }, () => true));
+            }
+        }
+
+        private ICommand _mictoReminderCommand;
+        public ICommand MIC_L1ToReminderCommand
+        {
+            get
+            {
+                return _mictoReminderCommand ?? (_mictoReminderCommand = new CommandHandler((sender) =>
+                {
+                    Messenger.Instance.Send(sender as RefinementMethode, "Reminder_MIC1");
+                }, () => true));
+            }
+        }
+
+
         public Refinery ById(string id)
         {
-           switch(id)
+            switch (id)
             {
                 case "ARC-L1":
                     return ARC_L1;

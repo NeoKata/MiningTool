@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Mining_Tool_3.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace Mining_Tool_3.Model
 {

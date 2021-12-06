@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Mining_Tool_3.ViewModel
 {
@@ -58,32 +59,37 @@ namespace Mining_Tool_3.ViewModel
 
         private void CargoItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-           UpdateGrid();
+            UpdateGrid();
         }
 
         private void UpdateGrid()
         {
             Refinery.MinValue = Double.MaxValue;
             Refinery.MaxValue = 0.0;
-           
+
             foreach (RefinementMethode refinementMethode in RefinementMethodes)
             {
                 foreach (string refineryId in Refinery.Refineries)
                 {
+                    double sumCost = 0.0;
                     refinementMethode.ById(refineryId).Cargo.Clear();
                     double sum = 0.0;
                     foreach (CargoItemVM cargo in Cargo.CargoItems)
-                    {                       
+                    {
                         double yield = refinementMethode.ById(refineryId).GetYield(cargo.Element);
                         double refineryBonus = 1.0 + yield;
                         double cargoSCU = cargo.cSCU * (1.0 - refinementMethode.Loss) * refineryBonus;
-                        double result = cargoSCU * cargo.Element.ValueRefined;
+                        double cost = cargo.cSCU * cargo.Element.CostForMethode(refinementMethode.MethodCost);
+                        sumCost += cost;
+                        double result = (cargoSCU * cargo.Element.ValueRefined) - cost;
                         sum += result;
                         refinementMethode.ById(refineryId).Cargo.Add(new KeyValuePair<Element, ElementValue>(cargo.Element, new ElementValue(yield, result)));
 
                     }
                     refinementMethode.ById(refineryId).Value = sum;
+                    refinementMethode.SumCost = sumCost;
                 }
+
             }
             OnPropertyChanged("RefinementMethodes");
         }

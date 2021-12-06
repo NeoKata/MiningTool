@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="Mining_Tool_3.View.ReminderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Mining_Tool_3.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="itemViewReminder">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <WrapPanel Grid.Column="0">
+                    <Label Content="{Binding Path=Refinery.Symbol}" Foreground="Aquamarine"/>
+                    <Label Content="{Binding Path=Refinery.Name}" Foreground="Aquamarine"/>
+                </WrapPanel>
+                <ItemsControl ItemsSource="{Binding ReminderDetails}" Grid.Column="1" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Value}" ContentStringFormat="{}{0:n} aUEC" Foreground="Aquamarine" HorizontalContentAlignment="Right" Width="100"/>
+                                <StackPanel Orientation="Horizontal" Width="145">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding TimeRun}" Value="True">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding TimeRun}" Value="False">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                    <local:NumberTimeControl Titel="d" MaxValue="99" NumberContent="{Binding Day}"/>
+                                    <local:NumberTimeControl Titel="h" MaxValue="24" NumberContent="{Binding Hour}"/>
+                                    <local:NumberTimeControl Titel="m" MaxValue="60" NumberContent="{Binding Minute}"/>
+                                    <local:NumberTimeControl Titel="s" MaxValue="60" NumberContent="{Binding Second}"/>
+                                </StackPanel>
+                                <Label Content="{Binding TimeLeft}" HorizontalContentAlignment="Center" Foreground="Aquamarine" Width="145">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding TimeRun}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding TimeRun}" Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                                <Button Margin="5 0 5 0" FontFamily="{StaticResource awesome-solid}" FontSize="18" Command="{Binding Path=PlayCommand}" CommandParameter="{Binding Mode=OneWay}">                                    
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Foreground" Value="RoyalBlue"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Ready}" Value="True">
+                                                    <Setter Property="Visibility" Value="Hidden"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding TimeRun}" Value="True">
+                                                    <Setter Property="Content" Value="&#xF04C;"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding TimeRun}" Value="False">
+                                                    <Setter Property="Content" Value="&#xF04B;"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
+                                <Label Content="&#xF1DA;" FontFamily="{StaticResource awesome-solid}" FontSize="18">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Ready}" Value="False">
+                                                    <Setter Property="Foreground" Value="OrangeRed"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Ready}" Value="True">
+                                                    <Setter Property="Foreground" Value="GreenYellow"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                                <Button Content="&#xF2ED;" FontFamily="{StaticResource awesome-solid}" FontSize="18" Command="{Binding Path=DeleteReminderCommand}" CommandParameter="{Binding Mode=OneWay}">
+                                    <Button.Resources>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="BorderBrush" Value="Transparent"/>
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Foreground" Value="RoyalBlue"/>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>       
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Border BorderBrush="Aquamarine" BorderThickness="1" SnapsToDevicePixels="True" Margin="0 3 0 0">
+            <StackPanel Orientation="Vertical" Background="Transparent">
+                <Label Foreground="Aquamarine" Margin="0 0 0 0">Reminder</Label>
+                <ItemsControl ItemsSource="{Binding ReminderItems}" ItemTemplate="{DynamicResource itemViewReminder}"/>                
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

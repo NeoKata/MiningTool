@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <local:ElementValueConverter x:Key="PurpelStyle" UpperLimit="100.0" LowerLimit="20.0"/>
-        <local:ElementValueConverter x:Key="GreenYellowStyle" UpperLimit="20.0" LowerLimit="10.0"/>
+        <local:ElementValueConverter x:Key="PurpelStyle" UpperLimit="100.0" LowerLimit="25.0"/>
+        <local:ElementValueConverter x:Key="GreenYellowStyle" UpperLimit="25.0" LowerLimit="10.0"/>
         <local:ElementValueConverter x:Key="YellowStyle" UpperLimit="10.0" LowerLimit="3.0"/>
         <local:ElementValueConverter x:Key="OrangeStyle" UpperLimit="3.0" LowerLimit="1.0"/>
         <local:ElementValueConverter x:Key="RedStyle" UpperLimit="1.0" LowerLimit="0.0"/>      
