@@ -11,11 +11,6 @@ namespace Mining_Tool_3.ViewModel
     public class ReminderVM : BaseVM
     {
         private Json _json = new Json();
-        private ReminderItemVM reminderItemARC1;
-        private ReminderItemVM reminderItemCRU1;
-        private ReminderItemVM reminderItemHUR1;
-        private ReminderItemVM reminderItemHUR2;
-        private ReminderItemVM reminderItemMIC1;
 
         ObservableCollection<ReminderItemVM> _reminderItems;
         public ObservableCollection<ReminderItemVM> ReminderItems
@@ -33,32 +28,6 @@ namespace Mining_Tool_3.ViewModel
         private void Remove(ReminderItemVM reminderItemVM)
         {
             ReminderItems.Remove(reminderItemVM);
-
-            if (reminderItemARC1 != null && reminderItemVM.Refinery.Symbol == reminderItemARC1.Refinery.Symbol)
-            {
-                reminderItemARC1 = null;
-                return;
-            }
-            if (reminderItemCRU1 != null && reminderItemVM.Refinery.Symbol == reminderItemCRU1.Refinery.Symbol)
-            {
-                reminderItemCRU1 = null;
-                return;
-            }
-            if (reminderItemHUR1 != null && reminderItemVM.Refinery.Symbol == reminderItemHUR1.Refinery.Symbol)
-            {
-                reminderItemHUR1 = null;
-                return;
-            }
-            if (reminderItemHUR2 != null && reminderItemVM.Refinery.Symbol == reminderItemHUR2.Refinery.Symbol)
-            {
-                reminderItemHUR2 = null;
-                return;
-            }
-            if (reminderItemMIC1 != null && reminderItemVM.Refinery.Symbol == reminderItemMIC1.Refinery.Symbol)
-            {
-                reminderItemMIC1 = null;
-                return;
-            }         
         }
 
         public ReminderVM()
@@ -66,32 +35,7 @@ namespace Mining_Tool_3.ViewModel
             foreach(var reminder in _json.readJson())
             {
                 var reminderItemVM = new ReminderItemVM(reminder);
-                ReminderItems.Add(new ReminderItemVM(reminder));
-                if (reminder.RafineryKey == Refinery.ARC_L1)
-                {
-                    reminderItemARC1 = reminderItemVM;
-                    continue;
-                }
-                if (reminder.RafineryKey == Refinery.CRU_L1)
-                {
-                    reminderItemCRU1 = reminderItemVM;
-                    continue;
-                }
-                if (reminder.RafineryKey == Refinery.HUR_L1)
-                {
-                    reminderItemHUR1 = reminderItemVM;
-                    continue;
-                }
-                if (reminder.RafineryKey == Refinery.HUR_L2)
-                {
-                    reminderItemHUR2 = reminderItemVM;
-                    continue;
-                }
-                if (reminder.RafineryKey == Refinery.MIC_L1)
-                {
-                    reminderItemMIC1 = reminderItemVM;
-                    continue;
-                }
+                ReminderItems.Add(new ReminderItemVM(reminder));               
             }
 
             Messenger.Instance.Register<RefinementMethode>(this, "Reminder_ARC1", ReceiveARC1);
@@ -117,75 +61,52 @@ namespace Mining_Tool_3.ViewModel
 
         private void ReceiveMIC1(RefinementMethode obj)
         {
-            if (reminderItemMIC1 == null)
-            {
-                reminderItemMIC1 = new ReminderItemVM(RefineryFactory.getRefinery(Refinery.MIC_L1));
-                ReminderItems.Add(reminderItemMIC1);            
-            }
-            reminderItemMIC1.ReminderDetails.Add(new ReminderItemDetailVM()
-            {
-                Value = obj.MIC_L1.Value,
-                ReminderItemVM = reminderItemMIC1
-            });
-            save();
+
+            CreateReminder(Refinery.MIC_L1, obj.MIC_L1.Value);
         }
 
         private void ReceiveHUR2(RefinementMethode obj)
         {
-            if (reminderItemHUR2 == null)
-            {
-                reminderItemHUR2 = new ReminderItemVM(RefineryFactory.getRefinery(Refinery.HUR_L2));
-                ReminderItems.Add(reminderItemHUR2);
-            }            
-            reminderItemHUR2.ReminderDetails.Add(new ReminderItemDetailVM()
-            {
-                Value = obj.HUR_L2.Value,
-                ReminderItemVM = reminderItemHUR2
-            });
-            save();
+            CreateReminder(Refinery.HUR_L2, obj.HUR_L2.Value);
         }
 
         private void ReceiveHUR1(RefinementMethode obj)
         {
-            if (reminderItemHUR1 == null)
-            {
-                reminderItemHUR1 = new ReminderItemVM(RefineryFactory.getRefinery(Refinery.HUR_L1));
-                ReminderItems.Add(reminderItemHUR1);
-            }
-            reminderItemHUR1.ReminderDetails.Add(new ReminderItemDetailVM()
-            {
-                Value = obj.HUR_L1.Value,
-                ReminderItemVM = reminderItemHUR1
-            });
-            save();
+            CreateReminder(Refinery.HUR_L1, obj.HUR_L1.Value);
         }
 
         private void ReceiveCRU1(RefinementMethode obj)
         {
-            if (reminderItemCRU1 == null)
-            {
-                reminderItemCRU1 = new ReminderItemVM(RefineryFactory.getRefinery(Refinery.CRU_L1));
-                ReminderItems.Add(reminderItemCRU1);
-            }
-            reminderItemCRU1.ReminderDetails.Add(new ReminderItemDetailVM()
-            {
-                Value = obj.CRU_L1.Value,
-                ReminderItemVM = reminderItemCRU1
-            });
-            save();
+            CreateReminder(Refinery.CRU_L1, obj.CRU_L1.Value);
         }
 
         private void ReceiveARC1(RefinementMethode obj)
         {
-            if (reminderItemARC1 == null)
+            CreateReminder(Refinery.ARC_L1, obj.ARC_L1.Value);
+        }
+
+
+        private void CreateReminder(String RefineryKey,double value)
+        {
+            ReminderItemVM found = null;
+            foreach(var reminder in ReminderItems)
             {
-                reminderItemARC1 = new ReminderItemVM(RefineryFactory.getRefinery(Refinery.ARC_L1));
-                ReminderItems.Add(reminderItemARC1);
+                if(reminder.Refinery.Symbol.Equals(RefineryKey))
+                {
+                    found = reminder;
+                    break;
+                   
+                }
             }
-            reminderItemARC1.ReminderDetails.Add(new ReminderItemDetailVM()
+            if(found == null)
             {
-                Value = obj.ARC_L1.Value,
-                ReminderItemVM = reminderItemARC1
+                found = new ReminderItemVM(RefineryFactory.getRefinery(RefineryKey));
+                ReminderItems.Add(found);
+            }
+            found.ReminderDetails.Add(new ReminderItemDetailVM()
+            {
+                Value = value,
+                ReminderItemVM = found
             });
             save();
         }
@@ -193,27 +114,10 @@ namespace Mining_Tool_3.ViewModel
         private void save()
         {
             List<Reminder> reminder = new List<Reminder>();
-            if (reminderItemARC1 != null)
+            foreach(var reminderVM in ReminderItems)
             {
-                reminder.Add(reminderItemARC1.Model);
+                reminder.Add(reminderVM.Model);
             }
-            if (reminderItemCRU1 != null)
-            {
-                reminder.Add(reminderItemCRU1.Model);
-            }
-            if (reminderItemHUR1 != null)
-            {
-                reminder.Add(reminderItemHUR1.Model);
-            }
-            if (reminderItemHUR2 != null)
-            {
-                reminder.Add(reminderItemHUR2.Model);
-            }
-            if (reminderItemMIC1 != null)
-            {
-                reminder.Add(reminderItemMIC1.Model);
-            }
-
             _json.writeJson(reminder);
         }
 

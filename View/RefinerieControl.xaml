@@ -33,11 +33,12 @@
     </UserControl.Resources>
     <StackPanel>
         <Border BorderBrush="Aquamarine" BorderThickness="0" Margin="0 2 0 0" >
-            <DataGrid Grid.Row="1" Grid.Column="1" ItemsSource="{Binding RefinementMethodes}" AutoGenerateColumns="False" IsReadOnly="True" 
+            <DataGrid x:Name="MyDataGrid" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding RefinementMethodes}" AutoGenerateColumns="False" IsReadOnly="True" 
           HorizontalGridLinesBrush="Aquamarine"
-          VerticalGridLinesBrush="Aquamarine"
+          VerticalGridLinesBrush="Aquamarine"         
+          SelectionMode="Single"
           RowDetailsVisibilityMode="{Binding RowDetailsVisible}"
-          MouseDown="DataGrid_MouseDown">
+          SelectionChanged="MyDataGrid_SelectionChanged">
                 <DataGrid.Resources>
                     <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#7F08DABE"/>
                     <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#0008DABE"/>
@@ -60,7 +61,7 @@
                                             <ContentPresenter 
                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-			                            	SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+			                            	SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />                                            
                                         </Border>
                                     </Grid>
                                 </ControlTemplate>
@@ -95,12 +96,14 @@
                 <DataGrid.RowStyle>
                     <Style TargetType="DataGridRow">
                         <Setter Property="Background" Value="#FF242425"/>
+                        <EventSetter Event="MouseDown" Handler="DataGrid_MouseDown"/>
+                        <!--Setter Property="IsHitTestVisible" Value="False"/-->
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.CellStyle>
                     <Style TargetType="DataGridCell" >
-                        <Setter Property="Foreground" Value="{Binding Color}"/>
-                    </Style>
+                        <Setter Property="Foreground" Value="{Binding Color}"/>                        
+                    </Style>                   
                 </DataGrid.CellStyle>
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
@@ -176,7 +179,7 @@
                     <Style>
                         <Setter Property="Control.Background" Value="Transparent"/>
                     </Style>
-                </DataGrid.RowHeaderStyle>
+                </DataGrid.RowHeaderStyle>               
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Methode" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="ARC-L1" Binding="{Binding Path=ARC_L1.Value, StringFormat={}{0:n} aUEC}" FontSize="15"/>

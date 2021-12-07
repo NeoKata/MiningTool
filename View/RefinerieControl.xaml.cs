@@ -52,5 +52,14 @@ namespace Mining_Tool_3.View
                 viewModel.RowDetailsVisible = DataGridRowDetailsVisibilityMode.Collapsed;
             }
         }
+
+        private void MyDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefinerieVM viewModel = DataContext as RefinerieVM;
+            if (viewModel.RowDetailsVisible == DataGridRowDetailsVisibilityMode.Collapsed)
+            {
+                viewModel.RowDetailsVisible = DataGridRowDetailsVisibilityMode.VisibleWhenSelected;
+            }
+        }
     }
 }
