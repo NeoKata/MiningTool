@@ -62,31 +62,31 @@ namespace Mining_Tool_3.ViewModel
         private void ReceiveMIC1(RefinementMethode obj)
         {
 
-            CreateReminder(Refinery.MIC_L1, obj.MIC_L1.Value);
+            CreateReminder(Refinery.MIC_L1, obj.MIC_L1.Value, obj.MIC_L1.CargoSCU);
         }
 
         private void ReceiveHUR2(RefinementMethode obj)
         {
-            CreateReminder(Refinery.HUR_L2, obj.HUR_L2.Value);
+            CreateReminder(Refinery.HUR_L2, obj.HUR_L2.Value, obj.HUR_L2.CargoSCU);
         }
 
         private void ReceiveHUR1(RefinementMethode obj)
         {
-            CreateReminder(Refinery.HUR_L1, obj.HUR_L1.Value);
+            CreateReminder(Refinery.HUR_L1, obj.HUR_L1.Value, obj.HUR_L1.CargoSCU);
         }
 
         private void ReceiveCRU1(RefinementMethode obj)
         {
-            CreateReminder(Refinery.CRU_L1, obj.CRU_L1.Value);
+            CreateReminder(Refinery.CRU_L1, obj.CRU_L1.Value, obj.CRU_L1.CargoSCU);
         }
 
         private void ReceiveARC1(RefinementMethode obj)
         {
-            CreateReminder(Refinery.ARC_L1, obj.ARC_L1.Value);
+            CreateReminder(Refinery.ARC_L1, obj.ARC_L1.Value, obj.ARC_L1.CargoSCU);
         }
 
 
-        private void CreateReminder(String RefineryKey,double value)
+        private void CreateReminder(String RefineryKey,double value, double scu)
         {
             ReminderItemVM found = null;
             foreach(var reminder in ReminderItems)
@@ -106,6 +106,7 @@ namespace Mining_Tool_3.ViewModel
             found.ReminderDetails.Add(new ReminderItemDetailVM()
             {
                 Value = value,
+                SCU = scu,
                 ReminderItemVM = found
             });
             save();

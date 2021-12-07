@@ -22,6 +22,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="{Binding Value}" ContentStringFormat="{}{0:n} aUEC" Foreground="Aquamarine" HorizontalContentAlignment="Right" Width="100"/>
+                                <Label Content="{Binding SCU}" ContentStringFormat="{}{0:n} SCU" Foreground="Aquamarine" HorizontalContentAlignment="Right" Width="80"/>
                                 <StackPanel Orientation="Horizontal" Width="145">
                                     <StackPanel.Style>
                                         <Style TargetType="StackPanel">

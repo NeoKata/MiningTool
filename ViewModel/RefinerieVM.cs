@@ -84,7 +84,7 @@ namespace Mining_Tool_3.ViewModel
                         double result = (cargoSCU * cargo.Element.ValueRefined) - cost;
                         sum += result;
                         refinementMethode.ById(refineryId).Cargo.Add(new KeyValuePair<Element, ElementValue>(cargo.Element, new ElementValue(yield, result)));
-
+                        refinementMethode.ById(refineryId).CargoSCU = (cargoSCU/100);
                     }
                     refinementMethode.ById(refineryId).Value = sum;
                     refinementMethode.SumCost = sumCost;

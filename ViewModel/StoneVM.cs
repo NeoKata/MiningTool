@@ -134,12 +134,15 @@ namespace Mining_Tool_3.ViewModel
             }
             if (foundMineral == null)
             {
-                Minerals.Add(new MineralVM(_stone.AddMineral(element)));
+                foundMineral = new MineralVM(_stone.AddMineral(element));
+                Minerals.Add(foundMineral);
+
             }
-            else if (percent > -1)
+            if (percent > -1)
             {
                 foundMineral.Percentage = percent;
             }
+          
         }
 
         internal void SendToCargo(Element element)

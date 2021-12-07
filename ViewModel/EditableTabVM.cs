@@ -122,15 +122,6 @@ namespace Mining_Tool_3.ViewModel
                     return;
                 }
 
-                if (name.Contains(element.Name) && name.Contains("Cargo"))
-                {
-                    if (SelectedItem != null)
-                    {
-                        SelectedItem.SendToCargo(element);
-                    }
-                    return;
-                }
-
                 if (name.Contains(element.Name))
                 {
                     var names = name.Split(" ");

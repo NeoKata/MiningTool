@@ -136,37 +136,41 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Grid.Row="0" Content="{Binding ARC_L1.Symbol}" Foreground="Aquamarine"/>
+                                <Label Grid.Column="0" Grid.Row="0" Content="{Binding ARC_L1.Name}" Foreground="Aquamarine"/>
                                 <WrapPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left">
-                                    <Label Content="{Binding ARC_L1.Name}" Foreground="Aquamarine"/>
+                                    <Label Content="{Binding ARC_L1.Symbol}" Foreground="Aquamarine"/>
                                     <Button Margin="0 0 6 0" Content="&#xF328;" FontFamily="{StaticResource awesome-solid}" FontSize="15" Style="{DynamicResource defaultButton}"
                                         Command="{Binding Path=ARC_L1ToReminderCommand}" CommandParameter="{Binding Mode=OneWay}"/>
-                                </WrapPanel>
+                                </WrapPanel>                                
                                 <ItemsControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" ItemsSource="{Binding ARC_L1.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
-                                <Label Grid.Column="2" Grid.Row="0" Content="{Binding CRU_L1.Symbol}" Foreground="Aquamarine"/>
+
+                                <Label Grid.Column="2" Grid.Row="0" Content="{Binding CRU_L1.Name}" Foreground="Aquamarine"/>
                                 <WrapPanel Grid.Column="2" Grid.Row="1">
-                                    <Label Content="{Binding CRU_L1.Name}" Foreground="Aquamarine"/>
+                                    <Label Content="{Binding CRU_L1.Symbol}" Foreground="Aquamarine"/>
                                     <Button Margin="0 0 6 0" Content="&#xF328;" FontFamily="{StaticResource awesome-solid}" FontSize="15" Style="{DynamicResource defaultButton}"
                                         Command="{Binding Path=CRU_L1ToReminderCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 </WrapPanel>
                                 <ItemsControl Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" ItemsSource="{Binding CRU_L1.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
-                                <Label Grid.Column="4" Grid.Row="0" Content="{Binding HUR_L1.Symbol}" Foreground="Aquamarine"/>
+
+                                <Label Grid.Column="4" Grid.Row="0" Content="{Binding HUR_L1.Name}" Foreground="Aquamarine"/>
                                 <WrapPanel Grid.Column="4" Grid.Row="1">
-                                    <Label Content="{Binding HUR_L1.Name}" Foreground="Aquamarine"/>
+                                    <Label Content="{Binding HUR_L1.Symbol}" Foreground="Aquamarine"/>
                                     <Button Margin="0 0 6 0" Content="&#xF328;" FontFamily="{StaticResource awesome-solid}" FontSize="15" Style="{DynamicResource defaultButton}"
                                         Command="{Binding Path=HUR_L1ToReminderCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 </WrapPanel>
                                 <ItemsControl Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="2" ItemsSource="{Binding HUR_L1.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
-                                <Label Grid.Column="6" Grid.Row="0" Content="{Binding HUR_L2.Symbol}" Foreground="Aquamarine"/>
+
+                                <Label Grid.Column="6" Grid.Row="0" Content="{Binding HUR_L2.Name}" Foreground="Aquamarine"/>
                                 <WrapPanel Grid.Column="6" Grid.Row="1">
-                                    <Label Content="{Binding HUR_L2.Name}" Foreground="Aquamarine"/>
+                                    <Label Content="{Binding HUR_L2.Symbol}" Foreground="Aquamarine"/>
                                     <Button Margin="0 0 6 0" Content="&#xF328;" FontFamily="{StaticResource awesome-solid}" FontSize="15" Style="{DynamicResource defaultButton}"
                                         Command="{Binding Path=HUR_L2ToReminderCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 </WrapPanel>
                                 <ItemsControl Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="2" ItemsSource="{Binding HUR_L2.Cargo}" ItemTemplate="{DynamicResource itemViewDetails}"/>
-                                <Label Grid.Column="8" Grid.Row="0" Content="{Binding MIC_L1.Symbol}" Foreground="Aquamarine"/>
+
+                                <Label Grid.Column="8" Grid.Row="0" Content="{Binding MIC_L1.Name}" Foreground="Aquamarine"/>
                                 <WrapPanel Grid.Column="8" Grid.Row="1">
-                                    <Label Content="{Binding MIC_L1.Name}" Foreground="Aquamarine"/>
+                                    <Label Content="{Binding MIC_L1.Symbol}" Foreground="Aquamarine"/>
                                     <Button Margin="0 0 6 0" Content="&#xF328;" FontFamily="{StaticResource awesome-solid}" FontSize="15" Style="{DynamicResource defaultButton}"
                                         Command="{Binding Path=MIC_L1ToReminderCommand}" CommandParameter="{Binding Mode=OneWay}"/>
                                 </WrapPanel>

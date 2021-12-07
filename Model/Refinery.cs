@@ -60,7 +60,7 @@ namespace Mining_Tool_3.Model
         public static double MinValue = double.MaxValue;
         public static double MaxValue = 0.0;
         public HashSet<KeyValuePair<Element, double>> YieldModifier { get; private set; }
-        public double Cost { get; set; }
+        public double CargoSCU { get; set; }
 
         public Refinery(string name, string symbol, HashSet<KeyValuePair<Element, double>> yield) => (Name, Symbol, YieldModifier) = (name, symbol, yield);
 

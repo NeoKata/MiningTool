@@ -13,5 +13,6 @@ namespace Mining_Tool_3.Model
         public int Second { get; set; }
         public bool TimerStart { get; set; }
         public double  UEC { get; set; }
+        public double SCU { get; set; }
     }
 }

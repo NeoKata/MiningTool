@@ -5,6 +5,18 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>Mining_Tool_3</RootNamespace>
     <UseWPF>true</UseWPF>
+    <Configurations>Debug;Release;Release + Deploy</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release + Deploy|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+    <Optimize>true</Optimize>
+    <DefineConstants />
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <OutputPath>D:\Projekte\C#\Builds\MiningTool\</OutputPath>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>

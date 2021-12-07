@@ -7,12 +7,12 @@ namespace Mining_Tool_3.Model
 {
     public class Element
     {
-        public static readonly Element QUANTANIUMN = new Element("Quantainium", "QUAN", 44.03, 88.0, 0, 0, "Quantanium", 2.0, 4.0, 12.0);
+        public static readonly Element QUANTANIUMN = new Element("Quantainium", "QUAN", 44.03, 88.0, 0, 0, "Quantanium", 2.4, 4.8, 14.4);
         public static readonly Element BEXALITE = new Element("Bexalite", "BEXA", 22.01, 43.91, 1, 0, "Bexaliet", 1.0, 2.0, 6.0);
         public static readonly Element TARANITE = new Element("Taranite", "TARA", 17.60, 35.13, 2, 0, "Taraniet", 0.8, 1.6, 4.8);
         public static readonly Element BORASE = new Element("Borase", "BORA", 16.82, 35.21, 3, 0, "Borase", 0.88, 1.76, 5.28);
         public static readonly Element LARANITE = new Element("Laranite", "LARA", 15.41, 30.67, 0, 1, "Laraniet", 0.7, 1.4, 4.2);
-        public static readonly Element AGRICIUM = new Element("Agricium", "AGRI", 13.65, 27.47, 1, 1, "Akriecieum", 0.65, 1.3, 3.9);
+        public static readonly Element AGRICIUM = new Element("Agricium", "AGRI", 13.65, 27.47, 1, 1, "Akriecieum", 0.9, 1.8, 5.4);
         public static readonly Element HEPHAESTANITE = new Element("Hephaestanite", "HEPH", 7.92, 15.74, 2, 1, "Hefstaniet", 0.35, 0.7, 1.4);
         public static readonly Element TITANIUM = new Element("Titanium", "TITA", 4.25, 8.88, 3, 1, "Titanium", 0.2, 0.4, 1.2);
         public static readonly Element DIAMOND = new Element("Diamond", "DIAM", 3.63, 7.3, 0, 2, "Diamand", 0.16, 0.32, 0.96);

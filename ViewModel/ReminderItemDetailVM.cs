@@ -19,6 +19,7 @@ namespace Mining_Tool_3.ViewModel
 
         public DateTime Timer { get { return Model.Timer; } set { Model.Timer = value; } }
         public double Value { get { return Model.UEC; } set { Model.UEC = value; } }
+        public double SCU { get { return Model.SCU; } set { Model.SCU = value; } }
         public string TimeLeft { get; set; }
         public bool Ready { get; set; }
 
