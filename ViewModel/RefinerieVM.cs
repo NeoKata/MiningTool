@@ -74,19 +74,22 @@ namespace Mining_Tool_3.ViewModel
                     double sumCost = 0.0;
                     refinementMethode.ById(refineryId).Cargo.Clear();
                     double sum = 0.0;
+                    double cargoSum = 0.0;
                     foreach (CargoItemVM cargo in Cargo.CargoItems)
                     {
                         double yield = refinementMethode.ById(refineryId).GetYield(cargo.Element);
                         double refineryBonus = 1.0 + yield;
                         double cargoSCU = cargo.cSCU * (1.0 - refinementMethode.Loss) * refineryBonus;
+                        cargoSum += (cargoSCU / 100);
                         double cost = cargo.cSCU * cargo.Element.CostForMethode(refinementMethode.MethodCost);
                         sumCost += cost;
                         double result = (cargoSCU * cargo.Element.ValueRefined) - cost;
                         sum += result;
                         refinementMethode.ById(refineryId).Cargo.Add(new KeyValuePair<Element, ElementValue>(cargo.Element, new ElementValue(yield, result)));
-                        refinementMethode.ById(refineryId).CargoSCU = (cargoSCU/100);
+                       
                     }
                     refinementMethode.ById(refineryId).Value = sum;
+                    refinementMethode.ById(refineryId).CargoSCU = cargoSum;
                     refinementMethode.SumCost = sumCost;
                 }
 
