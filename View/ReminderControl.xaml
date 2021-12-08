@@ -75,7 +75,7 @@
                                         </Style>
                                     </Button.Resources>
                                 </Button>
-                                <Label Content="&#xF1DA;" FontFamily="{StaticResource awesome-solid}" FontSize="18">
+                                <Label Content="&#xF017;" FontFamily="{StaticResource awesome-solid}" FontSize="18">
                                     <Label.Style>
                                         <Style TargetType="Label">
                                             <Style.Triggers>

@@ -16,8 +16,7 @@
                             <ContentPresenter x:Name="MyContentPresenter" 
                                           Content="{TemplateBinding Content}"
                                           HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center"
-                                          />
+                                          VerticalAlignment="Center"/>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>

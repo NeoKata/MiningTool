@@ -399,7 +399,7 @@
         </Style>
 
     </UserControl.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -413,8 +413,9 @@
                 <Button x:Name="MiningViewButton" Content="&#xF3A5;" Style="{StaticResource SelectedButton}" Click="SetMiningView" />
                 <Button x:Name="RefinerieButton" Content="&#xF64F;" Style="{StaticResource DefaultButton}" Click="SetRefinerieView"/>
             </StackPanel>
-            <StackPanel x:Name="MiningView" Grid.Column="2" Orientation="Vertical">
-                <local:ElementControl x:Name="Element"/>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Column="2">
+            <StackPanel x:Name="MiningView"  Orientation="Vertical">
+                <local:ElementControl x:Name="Element" HorizontalAlignment="Right"/>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition MaxHeight="29"/>
@@ -424,7 +425,7 @@
                         <ColumnDefinition Width="7.5*"/>
                         <ColumnDefinition Width="3.5*"/>
                     </Grid.ColumnDefinitions>
-                    <local:EditableTabControl x:Name="ElementTab" Grid.Column="0" Grid.RowSpan="2" />
+                    <local:EditableTabControl x:Name="ElementTab" Grid.Column="0" Grid.RowSpan="2"/>
                     <ComboBox x:Name="ShipSelect" Grid.Column="1" Grid.Row="0" Margin="0 4 0 0" SelectionChanged="ShipSelect_SelectionChanged" Height="25">
                         <ComboBoxItem IsSelected="True">Prospector</ComboBoxItem>
                         <ComboBoxItem>Mole</ComboBoxItem>
@@ -434,7 +435,10 @@
                 <local:RefinerieControl x:Name="Refinerie" Cargo="{Binding ElementName=Cargo, Path=DataContext}" Visibility="Collapsed"/>
                 <local:ReminderControl x:Name="MyReminderControl" Visibility="Collapsed"/>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">               
+
+        </ScrollViewer>
+                
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">               
                 <Label Content="{Binding Speech}" Foreground="Aquamarine">
                     <Label.Style>
                         <Style TargetType="{x:Type Label}">
@@ -461,9 +465,8 @@
                         </Style>
                     </Button.Resources>
                 </Button>
-
-
             </StackPanel>
+            
         </Grid>
-    </ScrollViewer>
+
 </UserControl>
