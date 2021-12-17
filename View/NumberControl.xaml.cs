@@ -61,7 +61,7 @@ namespace Mining_Tool_3.View
                         if(names[i] == "Hundert")
                         {
                             names[i] = "100";
-                            number[i] = i - 1 > 1 ? int.Parse(names[i - 1]) * 99 : 100;
+                            number[i] = i - 1 >= 1 ? int.Parse(names[i - 1]) * 99 : 100;
                             continue;
                         }
                         if (int.Parse(names[i]) > 10 && i == 1 && names.Length > 2)
